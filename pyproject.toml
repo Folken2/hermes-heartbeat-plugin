@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hermes-heartbeat"
+version = "1.0.0"
+description = "Background heartbeat timer for the Hermes Agent — periodically checks the environment and reports only when something's interesting."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "Albert Folch", email = "folken2@users.noreply.github.com" }]
+keywords = ["hermes", "hermes-agent", "plugin", "heartbeat"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/Folken2/hermes-heartbeat-plugin"
+Issues = "https://github.com/Folken2/hermes-heartbeat-plugin/issues"
+
+[project.entry-points."hermes_agent.plugins"]
+hermes_heartbeat = "hermes_heartbeat"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hermes_heartbeat"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/hermes_heartbeat/plugin.yaml" = "hermes_heartbeat/plugin.yaml"
+"src/hermes_heartbeat/skills/heartbeat/SKILL.md" = "hermes_heartbeat/skills/heartbeat/SKILL.md"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+markers = ["needs_hermes: test requires an importable hermes-agent checkout"]

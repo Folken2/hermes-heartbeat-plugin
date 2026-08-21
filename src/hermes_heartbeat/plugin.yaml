@@ -1,0 +1,18 @@
+ame: hermes_heartbeat
+version: 1.0.0
+kind: standalone
+author: Albert Folch (Folken2)
+description: >-
+  Background heartbeat timer — periodically checks the environment and reports
+  only when something interesting is found. Off by default; enable with
+  `hermes heartbeat start` or `heartbeat_configure(enabled=true)`.
+provides_tools:
+  - heartbeat_configure
+  - heartbeat_status
+  - heartbeat_now
+provides_hooks:
+  - pre_llm_call
+  - on_session_start
+  - on_session_end
+provides_commands:
+  - heartbeat
